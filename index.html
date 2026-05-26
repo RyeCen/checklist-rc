@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist RC</title>
+
+<style>
+body { font-family: Arial; padding:15px; background:#f3f4f6;}
+.card { background:white; padding:12px; border-radius:10px; margin-bottom:10px;}
+button { padding:12px; margin:5px; font-weight:bold;}
+.check { margin-bottom:6px; display:block;}
+</style>
+
+</head>
+
+<body>
+
+<h2>Checklist Riesgos Críticos</h2>
+
+<div class="card">
+Operador:<br>
+<input id="operador" style="width:100%; padding:10px;"><br><br>
+
+Fecha:<br>
+<input type="date" id="fecha"><br><br>
+
+Observaciones:<br>
+<textarea id="obs" style="width:100%;padding:10px;"></textarea>
+</div>
+
+<div class="card">
+<button onclick="cargarRC('RC07')">RC07</button>
+<button onclick="cargarRC('RC11')">RC-11</button>
+<button onclick="cargarRC('RC12')">RC-12</button>
+<button onclick="cargarRC('RC13')">RC-13</button>
+<button onclick="cargarRC('RC23')">RC-23</button>
+</div>
+
+<div class="card">
+<h3 id="titulo"></h3>
+<div id="checks"></div>
+
+<h3 id="resultado">0%</h3>
+
+<button onclick="finalizar()">FINALIZAR</button>
+<button onclick="exportar()">EXPORTAR CSV</button>
+
+<p id="estado"></p>
+</div>
+
+<script>
+
+let rcActual = "RC07";
+
+let DATA = {
