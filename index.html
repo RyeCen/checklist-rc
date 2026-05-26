@@ -494,6 +494,22 @@
         return null;
       }
 
+      function enviarAGoogle(data) {
+  fetch("https://script.google.com/macros/s/AKfycbx2XU5y3NCQ6YCgizSOtuxBMpHdPCWgeU5shXdQqVwbTHJDfO3DrpK9AEA5wjoRv4K7/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    console.log("✅ Enviado a Google Sheets");
+  })
+  .catch((error) => {
+    console.error("❌ Error:", error);
+  });
+}
+      
       const calc = calcular();
 
       return {
