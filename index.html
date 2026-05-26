@@ -554,16 +554,32 @@
     }
 
     function finalizar() {
-      const record = getRecord();
-      if (!record) return;
+  const operador = getOperador();
 
-      let historial = JSON.parse(localStorage.getItem("checklist_historial") || "[]");
-      historial.push(record);
-      localStorage.setItem("checklist_historial", JSON.stringify(historial));
+  if (!operador) {
+    setEstado("Ingresa el nombre del operador.", "#b91c1c");
+    return;
+  }
 
-      limpiarFormulario();
-      setEstado("Checklist finalizado y guardado localmente.");
-    }
+  const calc = calcular();
+
+  const data = {
+    operador: operador,
+    rc: rcActual,
+    porcentaje: calc.porcentaje,
+    fecha: getFecha(),
+    observaciones: getObservaciones()
+  };
+
+  // 🔥 ENVÍA A GOOGLE SHEETS
+  enviarAGoogle(data);
+
+  // ✅ MENSAJE
+  setEstado("✅ Enviado a Google Sheets correctamente");
+
+  // ✅ LIMPIA FORMULARIO
+  limpiarFormulario();
+}
 
     function limpiarFormulario() {
       document.getElementById("operador").value = "";
